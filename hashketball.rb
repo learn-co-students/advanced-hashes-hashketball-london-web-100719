@@ -175,36 +175,59 @@ def big_shoe_rebounds
   return biggest_shoe_and_rebounds[1]
 end
 
+def most_points_scored
+  most_points_and_name = [0,""]
+  game_hash.each do |location, team_data|
+    team_data[:players].each do |player_stats|
+      if player_stats[:points] > most_points_and_name[0]
+        most_points_and_name[0] = player_stats[:points]
+        most_points_and_name[1] = player_stats[:player_name]
+      end
+    end
+  end
+  return most_points_and_name[1]
+end
 
-=begin
+def winning_team
+  # 1) loop the score of each player into a team score
+  # 2) compare the scores of the team, return the team name
+  team_scores = {} # we will store each team's name and score here
+  game_hash.each do |location, team_data|
+    if !team_scores[:team_name]
+      team_scores[team_data[:team_name]] = 0
+    end
+    team_data[:players].each do |player_stats| 
+      team_scores[team_data[:team_name]] += player_stats[:points]
+    end
+  end
+  return (team_scores.values[0] > team_scores.values[1]) ? team_scores.keys[0] : team_scores.keys[1]
+end
 
-Here's our spec for this lab:
+def player_with_longest_name
+  longest_name = ""
+  game_hash.each do |location, team_data|
+    team_data[:players].each do |player_stats| 
+      if player_stats[:player_name].length > longest_name.length
+        longest_name = player_stats[:player_name]
+      end
+    end
+  end
+  return longest_name
+end
 
-hashketball
-  #num_points_scored
-    knows the number of points scored by each player (FAILED - 1)
-  #shoe_size
-    knows the shoe size of each player (FAILED - 2)
-  #team_colors
-    knows the Brooklyn Nets colors are Black and White (FAILED - 3)
-  #team_names
-    returns the team names (FAILED - 4)
-  #player_numbers
-    returns the player jersey numbers (FAILED - 5)
-  #player_stats
-    returns all stats for a given player (FAILED - 6)
-  #big_shoe_rebounds
-    returns the number of rebounds of the player with the biggest shoe size (FAILED - 7)
-
-bonus
-  #most_points_scored
-    returns Ben Gordon (FAILED - 8)
-  #winning_team
-    returns the Brooklyn Nets (FAILED - 9)
-  #player_with_longest_name
-    returns Bismack Biyombo (FAILED - 10)
-
-super bonus
-  #long_name_steals_a_ton?
-    returns true (FAILED - 11)
-=end
+def long_name_steals_a_ton?
+  #Inputs
+  most_steals = ["", 0]
+  
+  #Logic
+  game_hash.each do |location, team_data|
+    team_data[:players].each do |player_stats| 
+      if player_stats[:steals] > most_steals[1]
+        most_steals = [player_stats[:player_name], player_stats[:steals]]
+      end
+    end
+  end
+  
+  #Outputs
+  return (player_with_longest_name == most_steals[0]) #keep it DRY!
+end
