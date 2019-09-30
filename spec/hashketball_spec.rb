@@ -247,7 +247,6 @@ describe 'hashketball' do
 end
 
 # If you'd like to work on the bonus, uncomment these tests.
-
 describe 'bonus' do
 
   describe '#most_points_scored' do
