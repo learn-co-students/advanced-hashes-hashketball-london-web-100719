@@ -1,0 +1,17 @@
+
+    away: {
+      team_name: , 
+      colors: [],
+      players: [{
+        number: ,
+        shoe: ,
+        points: ,
+        assists: ,
+        steals: ,
+        blocks: ,
+        slam_dunks
+      }] 
+    }
+  
+  }
+  
