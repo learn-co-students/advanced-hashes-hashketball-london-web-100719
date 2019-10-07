@@ -35,8 +35,7 @@ def num_points_scored(player_name)
     information[:players].each do |element|
       
       if element[:name] == player_name
-        answer = element[:points]
-        return answer
+        return element[:points]
       end
       
     end
@@ -51,8 +50,8 @@ def shoe_size(player_name)
     information[:players].each do |element|
       
       if element[:name] == player_name
-        answer = element[:shoe]
-        return answer
+        return element[:shoe]
+        
       end
       
     end
@@ -64,8 +63,7 @@ def team_colors(team_name)
   
   game_hash.each do |team, information|
     if information[:team_name] == team_name
-      answer = information[:colors]
-      return answer
+      return information[:colors]
     end
   end
     
@@ -121,12 +119,11 @@ def big_shoe_rebounds
 
      if element[:shoe] > stats[0]
        stats[0] = element[:shoe]
-       stats[1] = element[:name]
-       stats[2] = element[:rebounds]
+       stats[1] = element[:rebounds]
      end
 
     end
-    return stats[2]
+    return stats[1]
   end
 end 
 
