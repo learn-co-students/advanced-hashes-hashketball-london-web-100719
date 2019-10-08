@@ -103,20 +103,23 @@ def game_hash
   }
 end
 
+# Calculate aggregate score for a given player
 def num_points_scored(name)
-  player_score = 0
-  game_hash.each do |location, team_data|
+  #player_score = 0
+  game_hash.each do |_location, team_data|
     team_data[:players].each do |player_stats|
       if player_stats[:player_name].include? (name)
-        player_score = player_stats[:points]
-        return player_score
+        #player_score = player_stats[:points]
+        #return player_score
+        return player_stats[:points]
       end  
     end
   end
 end
 
+# Return the player's shoe size
 def shoe_size(name)
-  game_hash.each do |location, team_data|
+  game_hash.each do |_location, team_data|
     team_data[:players].each do |player_stats|
       if player_stats[:player_name].include? (name)
         return player_stats[:shoe]
@@ -125,16 +128,18 @@ def shoe_size(name)
   end
 end
 
+# Return a given team's colors
 def team_colors(team_name_arg)
-  game_hash.each do |location, team_data|
+  game_hash.each do |_location, team_data|
     if team_data[:team_name].include? (team_name_arg)
       return team_data[:colors]
     end
   end
 end
 
+# Gives back an array of the team names
 def team_names
-  game_hash.collect do |location, team_data|
+  game_hash.collect do |_location, team_data|
     team_data[:team_name]
   end
 end
